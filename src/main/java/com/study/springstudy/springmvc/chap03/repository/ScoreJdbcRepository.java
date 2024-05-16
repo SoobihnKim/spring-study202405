@@ -63,7 +63,6 @@ public class ScoreJdbcRepository implements ScoreRepository {
             String sql = "SELECT * FROM tbl_score";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
-
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
