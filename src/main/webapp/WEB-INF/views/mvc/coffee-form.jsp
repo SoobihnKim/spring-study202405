@@ -75,7 +75,7 @@
 
 <script>
 
-    const coffePrice = {
+    const coffeePrice = {
         americano: 3000,
         cafeLatte: 4500,
         macchiato: 5000
@@ -89,9 +89,9 @@
     $menu.onchange = e => {
         // 커피를 선택하면 가격이 변해야 함!
         // console.log(e.target.value);
-        // console.log(coffePrice[e.target.value]);
+        // console.log(coffeePrice[e.target.value]);
 
-        const price = coffePrice[e.target.value]
+        const price = coffeePrice[e.target.value]
         document.querySelector('.price-value').textContent
             = price;
 

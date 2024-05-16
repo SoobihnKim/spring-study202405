@@ -1,10 +1,14 @@
 package com.study.springstudy.springmvc.chap02;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequestMapping("/hw")
 public class LoginController {
 
     /*
@@ -21,17 +25,38 @@ public class LoginController {
 
      */
 
-
-    @GetMapping("/hw/s-login-form")
+    @GetMapping("/s-login-form")
     public String login() {
         return "/mvc/s-form";
     }
 
-    @PostMapping("/hw/s-login-check")
-    public String loginResult() {
+    @PostMapping("/s-login-check")
+    public String loginResult(@RequestParam String id, String pw, Model model) {
 
-        return "/mvc/s-result";
+        System.out.println("id = " + id);
+        System.out.println("pw = " + pw);
 
+        String message;
+        if (id.equals("grape111")) {
+            if (pw.equals("ggg9999")) {
+                // success
+//                message = "로그인 성공!";
+                message = "success";
+            } else {
+                // pw fail
+//                message = "비밀번호가 틀렸습니다!";
+                message = "f-pw";
+            }
+        } else {
+            // id없는경우
+//            message = "회원가입되지 않은 계정입니다.";
+            message = "f-id";
+        }
+
+//        model.addAttribute("message", message);
+        model.addAttribute("result", message);
+
+        return "mvc/s-result";
     }
 
 }

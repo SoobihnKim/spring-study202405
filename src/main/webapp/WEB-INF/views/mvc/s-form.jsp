@@ -29,10 +29,6 @@
     </label>
 </form>
 
-<script>
-
-
-</script>
 
 </body>
 </html>
