@@ -37,6 +37,7 @@ public class ScoreController {
         System.out.println("/score/list : GET!");
 
         List<Score> scoreList = repository.findAll();
+
         model.addAttribute("sList", scoreList);
 
         return "score/score-list";

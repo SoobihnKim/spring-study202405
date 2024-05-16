@@ -21,10 +21,6 @@ public class ScoreJdbcRepository implements ScoreRepository {
         }
     }
 
-    private Connection connect() throws SQLException {
-        return DriverManager.getConnection(url, username, password);
-    }
-
     @Override
     public boolean save(Score score) {
 
@@ -51,6 +47,10 @@ public class ScoreJdbcRepository implements ScoreRepository {
             e.printStackTrace();
         }
         return false;
+    }
+
+    private Connection connect() throws SQLException {
+        return DriverManager.getConnection(url, username, password);
     }
 
     @Override
