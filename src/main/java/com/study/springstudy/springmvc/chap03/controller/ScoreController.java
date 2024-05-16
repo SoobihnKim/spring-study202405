@@ -25,7 +25,6 @@ import java.util.List;
     4. 성적정보 상세 조회 요청
     - /score/detail : GET
  */
-
 @Controller
 @RequestMapping("/score")
 public class ScoreController {
@@ -33,20 +32,19 @@ public class ScoreController {
     // 의존객체 설정
     private ScoreJdbcRepository repository = new ScoreJdbcRepository();
 
-
-    @GetMapping("/list") // url
+    @GetMapping("/list")
     public String list(Model model) {
-        System.out.println("/score/list: GET!");
+        System.out.println("/score/list : GET!");
 
         List<Score> scoreList = repository.findAll();
         model.addAttribute("sList", scoreList);
 
-        return "/score/score-list"; // jsp 파일 경로
+        return "score/score-list";
     }
 
     @PostMapping("/register")
     public String register(ScorePostDto dto) {
-        System.out.println("/score/register: POST!");
+        System.out.println("/score/register : POST!");
         System.out.println("dto = " + dto);
 
         // 데이터베이스에 저장
@@ -54,8 +52,8 @@ public class ScoreController {
         repository.save(score);
 
         // 다시 조회로 돌아가야 저장된 데이터를 볼 수 있음
-        // 포워딩이 아닌 리다이렉트로 재요청을
-        return "redirect:/score/list"; // 요청 url
+        // 포워딩이 아닌 리다이렉트로 재요청을 넣어야 새롭게 디비를 조회
+        return "redirect:/score/list";
     }
 
     @PostMapping("/remove")
@@ -65,12 +63,23 @@ public class ScoreController {
     }
 
     @GetMapping("/detail")
-    public String detail() {
+    public String detail(long stuNum, Model model) {
         System.out.println("/score/detail : GET!");
-        return "";
+//        System.out.println("stuNum = " + stuNum);
+
+        // 1. 상세조회를 원하는 학번을 읽기
+        // 2. DB에 상세조회 요청
+        Score score = repository.findOne(stuNum);
+        // 3. DB에서 조회한 회원정보 JSP에게 전달
+        model.addAttribute("s", score);
+
+        // 4. rank 조회
+        int[] result = repository.findRankByStuNum(stuNum);
+//        System.out.println("rank = " + rank);
+        model.addAttribute("rank", result[0]);
+        model.addAttribute("count", result[1]);
+
+        return "score/score-detail";
     }
-
-
-
 
 }
