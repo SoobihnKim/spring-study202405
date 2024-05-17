@@ -1,8 +1,6 @@
 package com.study.springstudy.webservlet.chap02.v3;
 
-import com.study.springstudy.webservlet.Model;
 import com.study.springstudy.webservlet.ModelAndView;
-import com.study.springstudy.webservlet.View;
 import com.study.springstudy.webservlet.chap02.v3.controller.SaveController;
 import com.study.springstudy.webservlet.chap02.v3.controller.ControllerV3;
 import com.study.springstudy.webservlet.chap02.v3.controller.JoinController;
@@ -17,8 +15,6 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.apache.taglibs.standard.lang.jstl.ImplicitObjects.createParamMap;
 
 @WebServlet("/chap02/v3/*")
 public class FrontControllerV3 extends HttpServlet {
