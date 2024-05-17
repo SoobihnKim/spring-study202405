@@ -33,6 +33,7 @@
 
     <div class="card-container">
 
+        <c:forEach var="b" items="${bList}">
         <div class="card-wrapper">
             <section class="card" data-bno="1">
                 <div class="card-title-wrapper">
@@ -47,6 +48,7 @@
                         </div>
                     </div>
                 </div>
+                </c:forEach>
                 <div class="card-content">
 
                     djsfldjsfsdf

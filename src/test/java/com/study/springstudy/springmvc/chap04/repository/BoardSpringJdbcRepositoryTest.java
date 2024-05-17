@@ -44,7 +44,7 @@ class BoardSpringJdbcRepositoryTest {
     @DisplayName("")
     void deleteTest() {
         //given
-        int boardId = 2;
+        int boardId = 1;
         //when
         boolean flag = springJdbc.delete(boardId);
         //then
