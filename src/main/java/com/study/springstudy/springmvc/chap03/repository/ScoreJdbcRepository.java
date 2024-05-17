@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository // @component 와 같음. 의미적으로 저장소를 뜻함.
+//@Repository // @component 와 같음. 의미적으로 저장소를 뜻함.
 public class ScoreJdbcRepository implements ScoreRepository {
 
     private String url = "jdbc:mariadb://localhost:3306/spring5";

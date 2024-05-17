@@ -1,9 +1,12 @@
 package com.study.springstudy.database.chap01;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.net.http.HttpTimeoutException;
 import java.util.List;
@@ -11,13 +14,25 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@Transactional
+@Rollback
 class SpringJdbcTest {
 
     @Autowired // 테스트 시 필드에 주입. public 붙이지말기.
     SpringJdbc springJdbc;
 
+    // 각 테스트 전에 공통으로 실행할 코드
+    @BeforeEach
+    void bulkInsert() {
+        for (int i = 0; i < 10; i++) {
+            Person p = new Person(i = 2000, "테스트맨" + i, 10);
+            springJdbc.save(p);
+        }
+    }
+
     // 단위 테스트 프레임워크: JUnit5
     // 테스트 == 단언(Assertion)
+    // 성공한 테스트는 실행할 때마다 성공해야함(rollback)
     @Test
     @DisplayName("사람의 정보를 입력하면 반드시 데이터베이스에 저장되어야 한다.")
     void saveTest() {
