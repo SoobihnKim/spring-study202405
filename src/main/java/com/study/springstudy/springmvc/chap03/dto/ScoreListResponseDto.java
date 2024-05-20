@@ -19,7 +19,6 @@ public class ScoreListResponseDto {
     }
 
     private String makeMaskingName(String stuName) {
-
         // 첫 글자 가져오기
         char firstLetter = stuName.charAt(0);
         String maskedName = "" + firstLetter;

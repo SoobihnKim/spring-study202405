@@ -1,5 +1,6 @@
 package com.study.springstudy.springmvc.chap03.entity;
 
+import com.study.springstudy.springmvc.chap03.dto.ScoreModifyRequestDto;
 import com.study.springstudy.springmvc.chap03.dto.ScorePostDto;
 
 import java.sql.ResultSet;
@@ -28,13 +29,26 @@ public class Score {
         this.grade = Grade.valueOf(rs.getString("grade"));
     }
 
+
     public Score(ScorePostDto dto) {
         this.stuName = dto.getName();
         this.kor = dto.getKor();
         this.eng = dto.getEng();
         this.math = dto.getMath();
+        calculate();
+    }
+
+    public Score(ScoreModifyRequestDto dto) {
+        this.stuNum = dto.getStuNum();
+        this.kor = dto.getKor();
+        this.eng = dto.getEng();
+        this.math = dto.getMath();
+        calculate();
+    }
+
+    private void calculate() {
         this.total = kor + eng + math;
-        this.average = (double) total / 3.0;
+        this.average = total / 3.0;
         this.grade = calcGrade();
     }
 
@@ -51,6 +65,7 @@ public class Score {
             return Grade.F;
         }
     }
+
 
     public long getStuNum() {
         return stuNum;
@@ -129,18 +144,4 @@ public class Score {
                 ", grade=" + grade +
                 '}';
     }
-
-    /*
-    CREATE TABLE tbl_score (
-            stu_num INT(8) PRIMARY KEY AUTO_INCREMENT,
-    stu_name VARCHAR(255) NOT NULL,
-    kor INT(3) NOT NULL,
-    eng INT(3) NOT NULL,
-    math INT(3) NOT NULL,
-    total INT(3),
-    average FLOAT(5, 2),
-    grade CHAR(1)
-);
-*/
-
 }
