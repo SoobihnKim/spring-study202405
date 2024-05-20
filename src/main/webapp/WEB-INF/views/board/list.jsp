@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -34,34 +34,32 @@
     <div class="card-container">
 
         <c:forEach var="b" items="${bList}">
-        <div class="card-wrapper">
-            <section class="card" data-bno="1">
-                <div class="card-title-wrapper">
-                    <h2 class="card-title">메롱메롱</h2>
-                    <div class="time-view-wrapper">
-                        <div class="time">
-                            <i class="far fa-clock"></i>
-                            2023-03-31</div>
-                        <div class="view">
-                            <i class="fas fa-eye"></i>
-                            <span class="view-count">0</span>
+            <div class="card-wrapper">
+                <section class="card" data-bno="1">
+                    <div class="card-title-wrapper">
+                        <h2 class="card-title">${b.shortTitle}</h2>
+                        <div class="time-view-wrapper">
+                            <div class="time">
+                                <i class="far fa-clock"></i>
+                                    ${b.date}</div>
+                            <div class="view">
+                                <i class="fas fa-eye"></i>
+                                <span class="view-count">${b.view}</span>
+                            </div>
                         </div>
                     </div>
+                    <div class="card-content">
+                            ${b.shortContent}
+                    </div>
+                </section>
+                <div class="card-btn-group">
+                    <button class="del-btn" data-href="#">
+                        <i class="fas fa-times"></i>
+                    </button>
                 </div>
-                </c:forEach>
-                <div class="card-content">
-
-                    djsfldjsfsdf
-
-                </div>
-            </section>
-            <div class="card-btn-group">
-                <button class="del-btn" data-href="#">
-                    <i class="fas fa-times"></i>
-                </button>
             </div>
-        </div>
 
+        </c:forEach>
 
     </div>
 
@@ -77,7 +75,6 @@
         </div>
     </div>
 </div>
-
 
 
 <script>
@@ -116,7 +113,7 @@
             // section태그에 붙은 글번호 읽기
             const bno = e.target.closest('section.card').dataset.bno;
             // 요청 보내기
-            window.location.href= '/board/detail?bno=' + bno;
+            window.location.href = '/board/detail?bno=' + bno;
         }
     });
 
@@ -143,7 +140,6 @@
         const $delBtn = e.target.closest('.card-wrapper')?.querySelector('.del-btn');
         $delBtn.style.opacity = '0';
     }
-
 
 
     $cardContainer.onmouseover = e => {
@@ -174,7 +170,6 @@
     document.querySelector('.add-btn').onclick = e => {
         window.location.href = '/board/write';
     };
-
 
 
 </script>

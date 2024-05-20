@@ -16,7 +16,7 @@ CREATE TABLE tbl_board (
     reg_date_time DATETIME DEFAULT current_timestamp
 );
  */
-
+// DB랑 연관
 @Setter @Getter @ToString
 @EqualsAndHashCode
 //@NoArgsConstructor

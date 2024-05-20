@@ -2,7 +2,7 @@ package com.study.springstudy.springmvc.chap04.dto;
 
 import com.study.springstudy.springmvc.chap04.entity.Board;
 import lombok.*;
-
+// 클라이언트와 연관
 // dto의 필드명은 반드시 html form태그의 입력태그들 name속성과 일치해야 함.
 @Setter @Getter @ToString
 @EqualsAndHashCode
