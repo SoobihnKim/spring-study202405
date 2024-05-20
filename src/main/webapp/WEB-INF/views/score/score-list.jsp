@@ -1,7 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
@@ -62,17 +63,19 @@
 
             width: 50%;
         }
+
         .list-header .sort-link-group {
             display: flex;
 
         }
+
         .list-header .sort-link-group div {
             margin-right: 20px;
         }
-
     </style>
 
 </head>
+
 <body>
 
 <div class="wrap">
@@ -111,15 +114,13 @@
 
             </li>
 
+
             <c:forEach var="s" items="${sList}">
-
-
                 <li>
-                    # 학번: ${s.stuNum}, 이름: <a href="/score/detail?stuNum=${s.stuNum}">${s.stuName}</a>,
+                    # 학번: ${s.stuNum}, 이름: <a href="/score/detail?stuNum=${s.stuNum}">${s.maskingName}</a>,
                     평균: ${s.average}점, 학점: ${s.grade}
                     <a class="del-btn" href="/score/remove?sn=${s.stuNum}">삭제</a>
                 </li>
-
             </c:forEach>
 
         </ul>
@@ -129,4 +130,5 @@
 </div>
 
 </body>
+
 </html>

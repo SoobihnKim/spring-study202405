@@ -1,9 +1,11 @@
 package com.study.springstudy.springmvc.chap03.controller;
 
+import com.study.springstudy.springmvc.chap03.dto.ScoreListResponseDto;
 import com.study.springstudy.springmvc.chap03.dto.ScorePostDto;
 import com.study.springstudy.springmvc.chap03.entity.Score;
 import com.study.springstudy.springmvc.chap03.repository.ScoreJdbcRepository;
 import com.study.springstudy.springmvc.chap03.repository.ScoreRepository;
+import com.study.springstudy.springmvc.chap03.service.ScoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +40,7 @@ public class ScoreController {
 
     // 의존객체 설정
     private final ScoreRepository repository;
+    private final ScoreService service;
 
     // @RequiredArgsConstructor
 //    @Autowired // 하나면 생략 가능
@@ -49,16 +52,15 @@ public class ScoreController {
     public String list(@RequestParam(defaultValue = "num") String sort, Model model) {
         System.out.println("/score/list : GET!");
 
-        List<Score> scoreList = repository.findAll(sort);
+        List<ScoreListResponseDto> dtos = service.getList(sort);
 
-//        switch (sort) {
-//            case "avg":
-//                scoreList.stream()
-//                        .sorted(Comparator.comparing(Score::getAverage))
-//                        .collect(Collectors.toList());
-//        }
+//        List<Score> scoreList = repository.findAll(sort);
+//        // dto 변환
+//        List<ScoreListResponseDto> dtos = scoreList.stream()
+//                .map(s -> new ScoreListResponseDto(s))
+//                .collect(Collectors.toList());
 
-        model.addAttribute("sList", scoreList);
+        model.addAttribute("sList", dtos);
 
         return "score/score-list";
     }
@@ -69,8 +71,9 @@ public class ScoreController {
         System.out.println("dto = " + dto);
 
         // 데이터베이스에 저장
-        Score score = new Score(dto);
-        repository.save(score);
+//        Score score = new Score(dto);
+//        repository.save(score);
+        service.insert(dto);
 
         // 다시 조회로 돌아가야 저장된 데이터를 볼 수 있음
         // 포워딩이 아닌 리다이렉트로 재요청을 넣어야 새롭게 디비를 조회
@@ -78,10 +81,12 @@ public class ScoreController {
     }
 
     @GetMapping("/remove")
-    public String remove(long sn) {
+    public String remove(@RequestParam("sn") long stuNum) {
         System.out.println("/score/remove : POST!");
 
-        repository.delete(sn);
+//        repository.delete(sn);
+        service.deleteScore(stuNum);
+
         return "redirect:/score/list";
     }
 
