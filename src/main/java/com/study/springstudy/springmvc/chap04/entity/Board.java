@@ -3,6 +3,8 @@ package com.study.springstudy.springmvc.chap04.entity;
 import lombok.*;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 /*
 CREATE TABLE tbl_board (
@@ -45,4 +47,14 @@ public class Board {
         this.content = content;
         this.writer = writer;
     }
+
+    public Board(ResultSet rs) throws SQLException {
+        this.boardNo = rs.getInt("board_no");
+        this.writer = rs.getString("writer");
+        this.content = rs.getString("content");
+        this.title = rs.getString("title");
+        this.viewCount = rs.getInt("view_count");
+        this.regDateTime = rs.getTimestamp("reg_date_time").toLocalDateTime();
+    }
+
 }

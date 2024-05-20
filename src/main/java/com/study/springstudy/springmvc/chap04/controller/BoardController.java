@@ -1,5 +1,6 @@
 package com.study.springstudy.springmvc.chap04.controller;
 
+import com.study.springstudy.springmvc.chap04.dto.BoardWriteRequestDto;
 import com.study.springstudy.springmvc.chap04.entity.Board;
 import com.study.springstudy.springmvc.chap04.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,17 +34,28 @@ public class BoardController {
     // 2. 게시글 쓰기 양식 화면 열기 요청 (/board/write: GET)
     @GetMapping("/write")
     public String write(Model model) {
+        System.out.println("/board/write GET!!");
 
-        model.addAttribute("b", new Board());
+//        model.addAttribute("b", new Board());
         return "board/write";
     }
 
     // 3. 게시글 등록 요청 (/board/write: POST)
     // => 목록조회 요청 리다이렉션
     @PostMapping("/write")
-    public String write(@ModelAttribute Board board) {
+    public String write(BoardWriteRequestDto dto) {
+        System.out.println("/board/write POST!!");
 
-        Board b = new Board();
+        // 1. 브라우저가 전달한 게시글 내용 읽기
+        System.out.println("dto = " + dto);
+        // 2. 해당 게시글을 데이터베이스에 저장하기 위해 엔터티 클래스로 변환
+//        Board b = new Board();
+//        b.setWriter(dto.getWriter());
+//        b.setContent(dto.getContent());
+//        b.setTitle(dto.getTitle());
+
+        Board b = dto.toEntity();
+        // 3. 데이터베이스 저장 명령
         repository.save(b);
 
         return "redirect:/board/list";

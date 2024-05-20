@@ -10,4 +10,8 @@ CREATE TABLE tbl_board (
 
 
 
-select * from tbl_board;
+SELECT * FROM tbl_board;
+
+-- 복제테이블 생성 CTAS
+CREATE TABLE tbl_board_copy
+AS SELECT * FROM tbl_board;

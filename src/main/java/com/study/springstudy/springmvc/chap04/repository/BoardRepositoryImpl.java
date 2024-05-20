@@ -1,9 +1,7 @@
 package com.study.springstudy.springmvc.chap04.repository;
 
-import com.study.springstudy.springmvc.chap03.entity.Score;
 import com.study.springstudy.springmvc.chap04.entity.Board;
 import lombok.RequiredArgsConstructor;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -11,20 +9,21 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class BoardSpringJdbcRepository implements BoardRepository {
+public class BoardRepositoryImpl implements BoardRepository {
 
     private final JdbcTemplate template;
 
     @Override
     public List<Board> findAll() {
-        String sql = "select * from tbl_board";
-        return template.query(sql, (rs, n) -> new Board());
+        String sql = "SELECT * FROM tbl_board";
+        return template.query(sql, (rs, rowNum) -> new Board(rs));
     }
+
 
     @Override
     public Board findOne(int boardNo) {
         String sql = "select * from tbl_board where board_no = ?";
-        return template.queryForObject(sql, (rs, rowNum) -> new Board(), boardNo);
+        return template.queryForObject(sql, (rs, rowNum) -> new Board(rs), boardNo);
     }
 
     @Override
