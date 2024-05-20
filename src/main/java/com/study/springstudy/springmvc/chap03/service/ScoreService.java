@@ -1,12 +1,6 @@
 package com.study.springstudy.springmvc.chap03.service;
 
-/*
-  컨트롤러와 레퍼지토리 사이에 위치하여 중간 처리를 담당
-   - 트랜잭션 처리, 데이터 가공 처리, 예외 처리, ...
-   - 의존 관계
-     Controller -> Service -> Repository
- */
-
+import com.study.springstudy.springmvc.chap03.dto.ScoreDetailResponseDto;
 import com.study.springstudy.springmvc.chap03.dto.ScoreListResponseDto;
 import com.study.springstudy.springmvc.chap03.dto.ScorePostDto;
 import com.study.springstudy.springmvc.chap03.entity.Score;
@@ -17,6 +11,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+/*
+  컨트롤러와 레퍼지토리 사이에 위치하여 중간 처리를 담당
+   - 트랜잭션 처리, 데이터 가공 처리, 예외 처리, ...
+   - 의존 관계
+     Controller -> Service -> Repository
+ */
 
 @RequiredArgsConstructor
 @Service
@@ -46,8 +47,14 @@ public class ScoreService {
     }
 
     // 개별조회 중간처리
-    public Score retrieve(long stuNum) {
-        return repository.findOne(stuNum);
+    public ScoreDetailResponseDto retrieve(long stuNum) {
+
+        Score score = repository.findOne(stuNum);
+        int[] result = repository.findRankByStuNum(stuNum);
+
+        ScoreDetailResponseDto dto
+                = new ScoreDetailResponseDto(score, result[0], result[1]);
+        return dto;
     }
 
 }
