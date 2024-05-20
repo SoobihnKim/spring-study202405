@@ -103,6 +103,8 @@ public class BoardController {
 
         // 엔터티 그대로 보내는거 좋은게아님
         Board b = repository.findOne(bno);
+        // 조회 수 상승
+        if(b != null) repository.upViewCount(bno);
 
         // 3. JSP 파일에 조회한 데이터 보내기
         // 엔터티 그대로 보내는거 좋은게아님(dto 만들어서 보내기)
