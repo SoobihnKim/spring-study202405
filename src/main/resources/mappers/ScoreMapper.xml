@@ -39,7 +39,7 @@
         UPDATE tbl_score
         SET kor = #{kor}, eng = #{eng}, math = #{math},
             total = #{total}, average =#{average}, grade = #{grade}
-        WHERE A.stu_num = #{stuNum}
+        WHERE stu_num = #{stuNum}
     </update>
 
 </mapper>

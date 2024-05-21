@@ -28,8 +28,9 @@ WHERE A.stu_num = 1;
 
 SELECT *,
        RANK() OVER (ORDER BY average DESC) AS "rank",
-        COUNT(*) OVER() AS cnt
-FROM tbl_score;
+       COUNT(*) OVER() AS cnt
+FROM tbl_score
+WHERE stu_num = 8;
 
 SELECT * FROM tbl_score;
 
@@ -42,5 +43,6 @@ FROM tbl_score;
 
 SELECT COUNT(*)
 FROM tbl_score
-GROUP BY stu_num
-;
+GROUP BY stu_num;
+
+

@@ -5,6 +5,7 @@ import com.study.springstudy.springmvc.chap04.dto.BoardListResponseDto;
 import com.study.springstudy.springmvc.chap04.dto.BoardWriteRequestDto;
 import com.study.springstudy.springmvc.chap04.entity.Board;
 import com.study.springstudy.springmvc.chap04.repository.BoardRepository;
+import com.study.springstudy.springmvc.chap04.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,32 +23,20 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class BoardController {
 
-    private final BoardRepository repository;
+//    private final BoardRepository repository;
+    private final BoardService service;
 
     // 1. 목록 조회 요청 (/board/list: GET)
     @GetMapping("/list")
     public String list(Model model) {
         System.out.println("/board/list GET!!");
-
         // 1. 데이터베이스로부터 게시글 목록 조회
-        List<Board> boardList = repository.findAll();
-
         // 2. 클라이언트에 데이터를 보내기전에 렌더링에 필요한 데이터만 추출하기
 
-        List<BoardListResponseDto> bList = boardList.stream()
-                .map(BoardListResponseDto::new)
-                .collect(Collectors.toList());
-
-//        List<BoardListResponseDto> bList = new ArrayList<>();
-//
-//        for (Board b : boardList) {
-//            BoardListResponseDto dto = new BoardListResponseDto(b);
-//            bList.add(dto);
-//        }
-
+        // 서비스에게 조회 요청 위임
+        List<BoardListResponseDto> blist = service.findList();
         // 3. JSP 파일에 해당 목록 데이터를 보냄
-        model.addAttribute("bList", bList);
-
+        model.addAttribute("bList", blist);
         return "board/list";
     }
 
@@ -65,17 +54,9 @@ public class BoardController {
         System.out.println("/board/write POST!!");
         // 1. 브라우저가 전달한 게시글 내용 읽기
         System.out.println("dto = " + dto);
-
         // 2. 해당 게시글을 데이터베이스에 저장하기 위해 엔터티 클래스로 변환
-//        Board b = new Board();
-//        b.setWriter(dto.getWriter());
-//        b.setContent(dto.getContent());
-//        b.setTitle(dto.getTitle());
-
-        Board b = dto.toEntity();
-
         // 3. 데이터베이스 저장 명령
-        repository.save(b);
+        service.insert(dto);
 
         return "redirect:/board/list";
     }
@@ -85,9 +66,7 @@ public class BoardController {
     @GetMapping("/delete")
     public String delete(int bno) {
         System.out.println("/board/delete GET!!");
-
-        repository.delete(bno);
-
+        service.remove(bno);
         return "redirect:/board/list";
     }
 
@@ -98,17 +77,10 @@ public class BoardController {
 
         // 1. 상세조회하고싶은 글 번호를 읽기
         System.out.println("bno = " + bno);
-
         // 2. 데이터베이스로부터 해당 글 번호 데이터 조회하기
-
-        // 엔터티 그대로 보내는거 좋은게아님
-        Board b = repository.findOne(bno);
-        // 조회 수 상승
-        if(b != null) repository.upViewCount(bno);
-
+        BoardDetailResponseDto dto = service.detail(bno);
         // 3. JSP 파일에 조회한 데이터 보내기
-        // 엔터티 그대로 보내는거 좋은게아님(dto 만들어서 보내기)
-        model.addAttribute("bbb",  new BoardDetailResponseDto(b));
+        model.addAttribute("bbb", dto);
 
         return "board/detail";
 
