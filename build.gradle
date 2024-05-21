@@ -35,6 +35,10 @@ dependencies {
     // Spring JDBC 모듈
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 
+    // Mybatis 마이바티스 모듈 (JDBC 깔려있어야함)
+    implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '2.2.2'
+
+
 }
 
 tasks.named('test') {

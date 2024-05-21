@@ -60,8 +60,6 @@ public class ScoreService {
 
     // 수정 완료를 위해 서비스 클래스에서 dto를 entity로 변환
     public void update(ScoreModifyRequestDto dto) {
-
         repository.updateScore(new Score(dto));
-
     }
 }

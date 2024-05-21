@@ -18,3 +18,29 @@ from (select *,
  COUNT(*) OVER() AS cnt
       from tbl_score) A
 where stu_num = 2;
+
+SELECT A.stu_num, A.rank, A.cnt
+FROM (SELECT *,
+             RANK() OVER (ORDER BY average DESC) AS "rank",
+              COUNT(*) OVER() AS cnt
+      FROM tbl_score) A
+WHERE A.stu_num = 1;
+
+SELECT *,
+       RANK() OVER (ORDER BY average DESC) AS "rank",
+        COUNT(*) OVER() AS cnt
+FROM tbl_score;
+
+SELECT * FROM tbl_score;
+
+SELECT * ,
+       RANK() OVER (ORDER BY average DESC) AS "rank"
+FROM tbl_score;
+
+SELECT COUNT(*)
+FROM tbl_score;
+
+SELECT COUNT(*)
+FROM tbl_score
+GROUP BY stu_num
+;
