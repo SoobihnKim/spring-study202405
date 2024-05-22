@@ -31,3 +31,11 @@ LIMIT 6, 6 -- 페이지 별로 다르게하려면 파라미터화 해야함
 
 SELECT COUNT(*)
 FROM tbl_board;
+
+-- 동적 sql
+-- 검색 -> where 절 조건
+SELECT * FROM tbl_board
+WHERE title LIKE CONCAT('%', '3', '%')
+   OR content LIKE '%3%'
+ORDER BY board_no DESC
+LIMIT 0, 6;
