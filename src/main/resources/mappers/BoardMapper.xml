@@ -7,12 +7,24 @@
 <!-- 설정파일에 매퍼 등록 -->
 <mapper namespace="com.study.springstudy.springmvc.chap04.mapper.BoardMapper">
 
+<!--    동적 sql   -->
     <select id="findAll" resultType="board">
         SELECT * FROM tbl_board
-        WHERE title LIKE CONCAT('%', #{keyword}, '%')
+        <if test="type == 'title'">
+            WHERE title LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="type == 'content'">
+            WHERE content LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="type == 'writer'">
+            WHERE writer LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="type == 'tc'">
+            WHERE title LIKE CONCAT('%', #{keyword}, '%')
+               OR content LIKE CONCAT('%', #{keyword}, '%')
+        </if>
         ORDER BY board_no DESC
         LIMIT #{pageStart}, #{amount}
-<!--        계산된 값으로 세팅되어야함-->
     </select>
 
     <select id="findOne" resultType="board">
