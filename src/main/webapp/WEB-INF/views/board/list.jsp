@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -16,6 +17,9 @@
 
     <!-- fontawesome css: https://fontawesome.com -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+
+    <!-- bootstrap css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/list.css">
@@ -77,8 +81,30 @@
         </c:forEach>
 
     </div>
+<%--    end div.card-container--%>
+
+    <!-- 게시글 목록 하단 영역 -->
+    <div class="bottom-section">
+
+        <!-- 페이지 버튼 영역 -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination pagination-lg pagination-custom">
+
+                <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
+                    <li data-page-num="${i}" class="page-item">
+                        <a class="page-link" href="/board/list?pageNo=${i}">${i}</a>
+                    </li>
+                </c:forEach>
+
+            </ul>
+        </nav>
+
+    </div>
+<%--   end div.bottom-section --%>
 
 </div>
+<%-- end div.wrap --%>
+
 
 <!-- 모달 창 -->
 <!-- 어떤 게시글을 누르던 모달 창은 하나 -->
