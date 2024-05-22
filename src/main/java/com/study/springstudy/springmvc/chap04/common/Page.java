@@ -32,6 +32,7 @@ public class Page {
             return;
         }
         this.amount = amount;
+
     }
 
     /*

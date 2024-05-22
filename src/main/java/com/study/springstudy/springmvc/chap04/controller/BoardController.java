@@ -37,7 +37,7 @@ public class BoardController {
         // 서비스에게 조회 요청 위임
         List<BoardListResponseDto> blist = service.findList(page);
         // 페이지 정보를 생성하여 JSP에게 전송
-        PageMaker maker = new PageMaker(page);
+        PageMaker maker = new PageMaker(page, service.getCount());
 
         // 3. JSP 파일에 해당 목록 데이터를 보냄
         model.addAttribute("bList", blist);

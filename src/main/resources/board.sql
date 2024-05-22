@@ -28,3 +28,6 @@ SELECT * FROM tbl_board
 ORDER BY board_no DESC
 LIMIT 6, 6 -- 페이지 별로 다르게하려면 파라미터화 해야함
 ;
+
+SELECT COUNT(*)
+FROM tbl_board;
