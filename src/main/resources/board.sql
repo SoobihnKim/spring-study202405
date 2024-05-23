@@ -79,3 +79,6 @@ FROM tbl_board B
 JOIN tbl_reply R
 on B.board_no = R.board_no
 GROUP BY B.board_no;
+
+SELECT * FROM tbl_reply
+WHERE reply_no = 2;
