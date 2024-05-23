@@ -39,3 +39,43 @@ WHERE title LIKE CONCAT('%', '3', '%')
    OR content LIKE '%3%'
 ORDER BY board_no DESC
 LIMIT 0, 6;
+
+-- 댓글 테이블 생성
+CREATE TABLE tbl_reply(
+    reply_no INT(8) PRIMARY KEY auto_increment,
+    reply_text VARCHAR(1000) NOT NULL,
+    reply_writer VARCHAR(100) NOT NULL,
+    reply_date DATETIME default current_timestamp,
+    board_no INT(8),
+    constraint fk_reply
+      foreign key (board_no)
+      references tbl_board(board_no)
+      on delete cascade
+);
+
+drop table tbl_reply;
+
+TRUNCATE table tbl_board;
+
+SELECT * FROM tbl_board;
+SELECT * FROM tbl_reply;
+
+SELECT * FROM tbl_reply
+WHERE board_no = 1;
+
+# 3번 글의 총 댓글 수
+SELECT COUNT(*) FROM tbl_reply
+WHERE board_no = 3;
+
+SELECT
+    B.board_no,
+    B.title,
+    B.content,
+    B.writer,
+    B.reg_date_time,
+    B.view_count,
+    COUNT(R.reply_no) AS reply_count
+FROM tbl_board B
+JOIN tbl_reply R
+on B.board_no = R.board_no
+GROUP BY B.board_no;
