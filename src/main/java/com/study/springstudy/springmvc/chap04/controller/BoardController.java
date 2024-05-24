@@ -53,6 +53,7 @@ public class BoardController {
     public String write() {
         System.out.println("/board/write GET!!");
         return "board/write";
+
     }
 
     // 3. 게시글 등록 요청 (/board/write: POST)
