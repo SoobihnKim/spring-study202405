@@ -82,3 +82,6 @@ GROUP BY B.board_no;
 
 SELECT * FROM tbl_reply
 WHERE reply_no = 2;
+
+SELECT * FROM tbl_reply
+WHERE board_no = 101;
