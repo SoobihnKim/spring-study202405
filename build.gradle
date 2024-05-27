@@ -38,6 +38,8 @@ dependencies {
     // Mybatis 마이바티스 모듈 (JDBC 깔려있어야함)
     implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '2.2.2'
 
+    // 입력값 검증 라이브러리
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 
 }
 

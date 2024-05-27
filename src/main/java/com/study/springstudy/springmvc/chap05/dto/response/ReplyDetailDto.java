@@ -1,11 +1,13 @@
 package com.study.springstudy.springmvc.chap05.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.study.springstudy.springmvc.chap05.entity.Reply;
 import lombok.*;
 
 import java.time.LocalDateTime;
 
+// 서버가 클라이언트한테 데이터 줄때
 @Getter @ToString
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,11 +15,12 @@ import java.time.LocalDateTime;
 @Builder
 public class ReplyDetailDto {
 
+    @JsonProperty("reply_no")
     private long rno;
     private String text;
     private String writer;
 
-    @JsonFormat(pattern = "yyyy년 MM월 dd일 HH:mm")
+    @JsonFormat(pattern = "yyyy년 MM월 dd일 HH:mm") // 클라이언트가 원하는대로, 화면에 적합하게 작성
     private LocalDateTime createAt;
 
     // 엔터티를 DTO로 변환하는 생성자
@@ -27,6 +30,5 @@ public class ReplyDetailDto {
         this.writer = r.getReplyWriter();
         this.createAt = r.getReplyDate();
     }
-
 
 }
