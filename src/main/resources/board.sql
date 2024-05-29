@@ -84,4 +84,4 @@ SELECT * FROM tbl_reply
 WHERE reply_no = 2;
 
 SELECT * FROM tbl_reply
-WHERE board_no = 101;
+WHERE board_no = 100;
