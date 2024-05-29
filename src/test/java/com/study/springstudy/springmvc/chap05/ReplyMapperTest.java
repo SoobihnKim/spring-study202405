@@ -45,18 +45,15 @@ class ReplyMapperTest {
         }
     }
 */
-
-
-
     @Test
     @DisplayName("전체조회")
     void findAllTest() {
         //given
         long boardNo = 1;
         //when
-//        List<Reply> replies = replyMapper.findAll(boardNo);
+        List<Reply> replies = replyMapper.findAll(boardNo, null);
         //then
-//        replies.forEach(System.out::println);
+        replies.forEach(System.out::println);
     }
 
 

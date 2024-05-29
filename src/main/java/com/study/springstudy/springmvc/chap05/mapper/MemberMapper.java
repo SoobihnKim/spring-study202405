@@ -2,6 +2,7 @@ package com.study.springstudy.springmvc.chap05.mapper;
 
 import com.study.springstudy.springmvc.chap05.entity.Member;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface MemberMapper {
@@ -14,11 +15,11 @@ public interface MemberMapper {
 
     // 중복 확인(아이디, 이메일)
     /**
-     *
+     * 중복 확인(아이디, 이메일)
      * @param type - 어떤 것을 중복검사할지 (ex: account OR email)
      * @param keyword - 중복 검사할 실제 값
      * @return - 중복이면 true, 아니면 false
      */
-    boolean existsById(String type, String keyword);
+    boolean existsById(@Param("type") String type, @Param("keyword") String keyword);
 
 }
