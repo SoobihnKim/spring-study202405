@@ -1,4 +1,5 @@
 import { BASE_URL } from './reply.js';
+import { showSpinner, hideSpinner } from './spinner.js';
 
 function getRelativeTime(createAt) {
     // 현재 시간 구하기
@@ -191,6 +192,7 @@ export async function fetchInfScrollReplies(pageNo=1) {
     appendReplies(replyResponse);
     currentPage = pageNo;
     isFetching = false;
+    hideSpinner();
 
     // 댓글을 전부 가져오면 스크롤 이벤트 제거
     if(loadedReplies >= totalReplies) {
@@ -199,13 +201,16 @@ export async function fetchInfScrollReplies(pageNo=1) {
 }
 
 // 스크롤 이벤트 핸들러 함수
-function scrollHandler(e) {
+async function scrollHandler(e) {
 
     // 스크롤이 최하단부로 내려갔을 때만 이벤트 발생시켜야 함
     //  현재창에 보이는 세로길이 + 스크롤을 내린 길이 >= 브라우저 전체 세로길이
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight + 200) {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight + 200 && !isFetching) {
         // console.log(e);
         // 서버에서 데이터를 비동기로 불러와야 함
+        // 2초의 대기열이 생성되면 다음 대기열 생성까지 2초를 기다려야함.
+        showSpinner();
+        await new Promise(resolve => setTimeout(resolve, 500));
         fetchInfScrollReplies(currentPage + 1);
     }
 }
