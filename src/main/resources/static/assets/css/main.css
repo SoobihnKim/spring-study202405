@@ -12,7 +12,13 @@ button {
     border: none;
 }
 
+.warning{
+    color: red;
+}
 
+.success {
+    color: skyblue;
+}
 
 #wrap {
     width: 60%;
