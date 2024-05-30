@@ -6,8 +6,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/members")
@@ -21,13 +24,13 @@ public class MemberController {
     @GetMapping("/sign-up")
     public void signUp() {
         log.info("/members/sign-up GET : forwarding to sign-up.jsp");
-//        return "members/sign-up"; url이 jsp 경로와 같으면 void로도 열림
+        // return "members/sign-up";
     }
 
     // 회원가입 요청 처리
     @PostMapping("/sign-up")
-    public String signUp(SignUpDto dto) {
-        log.info("/members/sign-up POST");
+    public String signUp(@Validated SignUpDto dto) {
+        log.info("/members/sign-up POST ");
         log.debug("parameter: {}", dto);
 
         boolean flag = memberService.join(dto);
@@ -35,13 +38,15 @@ public class MemberController {
         return flag ? "redirect:/board/list" : "redirect:/members/sign-up";
     }
 
-    // 아이디, 이메일 중복검사 비동기요청 처리
+    // 아이디, 이메일 중복검사 비동기 요청 처리
     @GetMapping("/check")
     @ResponseBody
     public ResponseEntity<?> check(String type, String keyword) {
         boolean flag = memberService.checkIdentifier(type, keyword);
         log.debug("{} 중복체크 결과? {}", type, flag);
-        return ResponseEntity.ok().body(flag);
+        return ResponseEntity
+                .ok()
+                .body(flag);
     }
 
 
