@@ -55,8 +55,6 @@ public class BoardService {
 //        List<Reply> replies = replyMapper.findAll(bno);
         // 댓글 실시간 비동기 요청
 
-
-
         BoardDetailResponseDto responseDto = new BoardDetailResponseDto(b);
 //        responseDto.setReplies(replies);
 

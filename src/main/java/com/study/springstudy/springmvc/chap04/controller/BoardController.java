@@ -71,7 +71,7 @@ public class BoardController {
     }
 
     // 4. 게시글 삭제 요청 (/board/delete: GET)
-    // => 목록조회 요청 리다이렉션
+    //     => 목록조회 요청 리다이렉션
     @GetMapping("/delete")
     public String delete(int bno) {
         System.out.println("/board/delete GET!!");

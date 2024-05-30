@@ -25,7 +25,10 @@ CREATE TABLE tbl_member (
 public class Member {
 
     private String account;
+
+    @Setter
     private String password;
+
     private String name;
     private String email;
     private Auth auth;
