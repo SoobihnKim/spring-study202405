@@ -99,3 +99,59 @@ CREATE TABLE tbl_member (
 );
 
 SELECT * FROM tbl_member;
+
+-- 게시글 테이블과 댓글 테이블에 회원 PK컬럼 추가
+ALTER TABLE tbl_board
+ADD (account VARCHAR(50));
+
+ALTER TABLE tbl_reply
+    ADD (account VARCHAR(50));
+
+SELECT * FROM tbl_board;
+
+UPDATE tbl_member
+SET auth = 'ADMIN'
+WHERE account = 'admin';
+
+commit;
+
+SELECT * FROM tbl_member;
+
+UPDATE tbl_board
+SET account = 'admin'
+WHERE account IS NULL;
+
+UPDATE tbl_reply
+SET account = 'admin'
+WHERE account IS NULL;
+
+commit;
+
+ALTER TABLE tbl_board
+ADD CONSTRAINT fk_board_member
+FOREIGN KEY (account)
+REFERENCES tbl_member (account);
+
+SELECT * FROM tbl_board
+ORDER BY board_no DESC ;
+
+SELECT
+    board_no, title, writer
+     , content, view_count
+     , reg_date_time, account
+FROM tbl_board
+WHERE board_no = 100
+ORDER BY board_no DESC
+;
+
+SELECT
+    B.board_no, B.title, M.name AS writer
+     , B.content, B.view_count
+     , B.reg_date_time, M.account
+FROM tbl_board B
+         LEFT OUTER JOIN tbl_member M
+                         ON B.account = M.account
+WHERE board_no = 100
+ORDER BY board_no DESC
+;
+
