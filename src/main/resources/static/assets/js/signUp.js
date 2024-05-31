@@ -21,7 +21,7 @@ const fields = [
 const updateButtonState = () => {
   
   // 모든 valid가 true인지 확인
-  const isFormValid = fields.every(field => field.valid); 
+  const isFormValid = fields.every(field => field.valid);
 
   if (isFormValid) {
     signupButton.disabled = false;
@@ -56,11 +56,11 @@ const validateField = async (field) => {
 fields.forEach(field => {
   const $input = document.getElementById(field.id);
   $input.addEventListener('keyup', debounce(() => {
-    validateField(field);
+    validateField(field); // 패스워드 검사
     // 비밀번호 필드가 변경될 때 비밀번호 확인 필드의 유효성도 다시 검사
     if (field.id === 'password') {
       const passwordCheckField = fields.find(f => f.id === 'password_check');
-      validateField(passwordCheckField);
+      validateField(passwordCheckField); // 패스워드 확인 검사
     }
   }, 500));
 });
