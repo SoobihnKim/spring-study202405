@@ -12,10 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +29,7 @@ public class MemberController {
     // 회원가입 양식 열기
     @GetMapping("/sign-up")
     public void signUp() {
+
         log.info("/members/sign-up GET : forwarding to sign-up.jsp");
         // return "members/sign-up";
     }
@@ -39,6 +37,9 @@ public class MemberController {
     // 회원가입 요청 처리
     @PostMapping("/sign-up")
     public String signUp(@Validated SignUpDto dto) {
+
+
+
         log.info("/members/sign-up POST ");
         log.debug("parameter: {}", dto);
 
@@ -60,17 +61,15 @@ public class MemberController {
 
     // 로그인 양식 열기
     @GetMapping("/sign-in")
-    public String signIn(HttpSession session) {
-        // 로그인을 한 사람이 이 요청을 보내면 돌려보낸다.
-//        LoginUserInfoDto login = (LoginUserInfoDto) session.getAttribute("login");
-//        if(login != null) {
-//            return "redirect:/"; }
+    public String signIn(HttpSession session
+            , @RequestParam(required = false) String redirect
+    ) {
 
-//        if(LoginUtil.isLoggedIn(session)) {
+        // 로그인을 한 사람이 이 요청을 보내면 돌려보낸다.
+//        if (LoginUtil.isLoggedIn(session)) {
 //            return "redirect:/";
 //        }
-
-
+        session.setAttribute("redirect", redirect);
 
         log.info("/members/sign-in GET : forwarding to sign-in.jsp");
         return "members/sign-in";
@@ -78,7 +77,8 @@ public class MemberController {
 
     // 로그인 요청 처리
     @PostMapping("/sign-in")
-    public String signIn(LoginDto dto, RedirectAttributes ra,
+    public String signIn(LoginDto dto,
+                         RedirectAttributes ra,
                          HttpServletRequest request) {
         log.info("/members/sign-in POST");
         log.debug("parameter: {}", dto);
@@ -89,14 +89,25 @@ public class MemberController {
         LoginResult result = memberService.authenticate(dto, session);
 
         // 로그인 검증 결과를 JSP에게 보내기
-        // Redirect시에 Redirect된 페이지에 데이터를 보낼때는 Model 객체를 사용할 수 없음
-        // 왜냐하면 Model 객체는 request 객체를 사용하는데 해당 객체는 한번의 요청이 끝나면 메모리에서 제거됨
-        // 그러나 redirect는 요청이 2번 발생하므로 다른 request 객체를 jsp가 사용하게됨
-//        model.addAttribute("result", result);
+        // Redirect시에 Redirect된 페이지에 데이터를 보낼 때는
+        // Model객체를 사용할 수 없음
+        // 왜냐면 Model객체는 request객체를 사용하는데 해당 객체는
+        // 한번의 요청이 끝나면 메모리에서 제거된다. 그러나 redirect는
+        // 요청이 2번 발생하므로 다른 request객체를 jsp가 사용하게 됨
+
+//        model.addAttribute("result", result); // (X)
         ra.addFlashAttribute("result", result);
 
-        if(result == LoginResult.SUCCESS) {
-        return "redirect:/index"; // 로그인 성공 시
+        if (result == LoginResult.SUCCESS) {
+
+            // 혹시 세션에 리다이렉트 URL이 있다면
+            String redirect = (String) session.getAttribute("redirect");
+            if (redirect != null) {
+                session.removeAttribute("redirect");
+                return "redirect:" + redirect;
+            }
+
+            return "redirect:/index"; // 로그인 성공시
         }
 
         return "redirect:/members/sign-in";
@@ -106,6 +117,7 @@ public class MemberController {
     public String signOut(HttpSession session) {
         // 세션 구하기
 //        HttpSession session = request.getSession();
+
         // 세션에서 로그인 기록 삭제
         session.removeAttribute("login");
 
@@ -115,6 +127,5 @@ public class MemberController {
         // 홈으로 보내기
         return "redirect:/";
     }
-
 
 }
