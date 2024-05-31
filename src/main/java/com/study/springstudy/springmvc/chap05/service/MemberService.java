@@ -37,6 +37,7 @@ public class MemberService {
 
     // 로그인 검증 처리
     public LoginResult authenticate(LoginDto dto, HttpSession session) {
+
         // 회원가입 여부 확인
         String account = dto.getAccount();
         Member foundMember = memberMapper.findOne(account);
