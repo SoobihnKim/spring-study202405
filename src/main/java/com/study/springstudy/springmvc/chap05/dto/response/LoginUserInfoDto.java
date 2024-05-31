@@ -20,6 +20,6 @@ public class LoginUserInfoDto {
         this.account = member.getAccount();
         this.nickName = member.getName();
         this.email = member.getEmail();
-        this.auth = member.getAuth().toString();
+        this.auth = member.getAuth().name();
     }
 }

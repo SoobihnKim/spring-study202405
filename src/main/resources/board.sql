@@ -155,3 +155,20 @@ WHERE board_no = 100
 ORDER BY board_no DESC
 ;
 
+SELECT
+    B.board_no,
+    B.title,
+    B.content,
+    B.writer,
+    B.reg_date_time,
+    B.view_count,
+    COUNT(R.reply_no) AS reply_count,
+    B.account
+FROM tbl_board B
+         LEFT OUTER JOIN tbl_reply R
+                         ON B.board_no = R.board_no
+GROUP BY B.board_no
+ORDER BY board_no DESC
+LIMIT 0, 6
+;
+
