@@ -1,5 +1,6 @@
 package com.study.springstudy.springmvc.chap05.mapper;
 
+import com.study.springstudy.springmvc.chap05.dto.request.AutoLoginDto;
 import com.study.springstudy.springmvc.chap05.entity.Member;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -21,5 +22,8 @@ public interface MemberMapper {
      * @return - 중복이면 true, 아니면 false
      */
     boolean existsById(@Param("type") String type, @Param("keyword") String keyword);
+
+    // 자동로그인 쿠키 값, 만료시간 업데이트
+    void updateAutoLogin(AutoLoginDto dto);
 
 }
