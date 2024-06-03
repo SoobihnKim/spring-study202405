@@ -7,23 +7,23 @@
 
     <insert id="insertViewLog">
         INSERT INTO view_log
-        (account, board_no, view_time)
+            (account, board_no, view_time)
         VALUES
-        (#{account}, #{boardNo}, #{viewTime})
+            (#{account}, #{boardNo}, #{viewTime})
     </insert>
 
     <update id="updateViewLog">
         UPDATE view_log
         SET view_time = #{viewTime}
         WHERE account = #{account}
-        AND board_no = #{boardNo}
+          AND board_no = #{boardNo}
     </update>
 
     <select id="findOne" resultType="viewLog">
         SELECT *
         FROM view_log
         WHERE account = #{account}
-        AND board_no = #{bno}
+          AND board_no = #{bno}
     </select>
 
 </mapper>

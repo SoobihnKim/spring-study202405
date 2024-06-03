@@ -110,6 +110,7 @@ public class MemberService {
         return memberMapper.existsById(type, keyword);
     }
 
+    // 자동로그인 로그아웃
     public void autoLoginClear(HttpServletRequest request, HttpServletResponse response) {
         // 1. 쿠키 제거
         Cookie c = WebUtils.getCookie(request, AUTO_LOGIN_COOKIE);

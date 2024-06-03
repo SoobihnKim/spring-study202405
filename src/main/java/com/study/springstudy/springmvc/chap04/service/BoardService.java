@@ -71,8 +71,7 @@ public class BoardService {
         HttpSession session = request.getSession();
 
         // 비회원이거나 본인 글이면 조회수 증가 방지
-        // 로그인 계정명
-        String currentUserAccount = getLoggedInUserAccount(session);
+        String currentUserAccount = getLoggedInUserAccount(session); // 로그인 계정명
 
         if (!isLoggedIn(session) || isMine(b.getAccount(), currentUserAccount)) {
             return new BoardDetailResponseDto(b);
@@ -120,7 +119,7 @@ public class BoardService {
           해당 게시물 번호로 쿠키를 생성 쿠키 안에는 생성 시간을 저장
           수명은 1시간으로 설정
         - 이후 게시물 조회시 반복해서 쿠키를 조회한 후 해당 쿠키가 존재할 시
-          false를 리턴하여 조회수증가를 방지
+          false를 리턴하여 조회수 증가를 방지
         - 쿠키 생성 예시
           Cookie(name= view_101, 2024-06-03 14:11:30)
      */
@@ -149,7 +148,6 @@ public class BoardService {
         newCookie.setMaxAge(60 * 60);
 
         response.addCookie(newCookie);
-
     }
 
     public int getCount(Search search) {

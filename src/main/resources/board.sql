@@ -191,9 +191,9 @@ CREATE TABLE view_log (
 );
 
 ALTER TABLE view_log
-ADD CONSTRAINT fk_member_viewlog
-FOREIGN KEY (account)
-REFERENCES tbl_member (account);
+  ADD CONSTRAINT fk_member_viewlog
+    FOREIGN KEY (account)
+      REFERENCES tbl_member (account);
 
 ALTER TABLE view_log
     ADD CONSTRAINT fk_board_viewlog
@@ -201,3 +201,16 @@ ALTER TABLE view_log
             REFERENCES tbl_board (board_no);
 
 SELECT * FROM view_log;
+
+-- 좋아요 기능
+CREATE TABLE tbl_reaction (
+        reaction_id INT(8) PRIMARY KEY AUTO_INCREMENT,
+        board_no INT(8) NOT NULL,
+        account VARCHAR(50) NOT NULL,
+        reaction_type ENUM('LIKE', 'DISLIKE') NOT NULL,
+        reaction_date DATETIME DEFAULT current_timestamp,
+                CONSTRAINT fk_reaction_board FOREIGN KEY (board_no) REFERENCES tbl_board(board_no),
+                CONSTRAINT fk_reaction_member FOREIGN KEY (account) REFERENCES tbl_member(account)
+);
+
+SELECT * FROM tbl_reaction;
