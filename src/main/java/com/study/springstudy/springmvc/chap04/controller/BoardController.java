@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
@@ -82,13 +83,13 @@ public class BoardController {
 
     // 5. 게시글 상세 조회 요청 (/board/detail : GET)
     @GetMapping("/detail")
-    public String detail(int bno, Model model, HttpServletRequest request) {
+    public String detail(int bno, Model model, HttpServletRequest request, HttpServletResponse response) {
         System.out.println("/board/detail GET!!");
 
         // 1. 상세조회하고싶은 글 번호를 읽기
         System.out.println("bno = " + bno);
         // 2. 데이터베이스로부터 해당 글 번호 데이터 조회하기
-        BoardDetailResponseDto dto = service.detail(bno);
+        BoardDetailResponseDto dto = service.detail(bno, request, response);
         // 3. JSP 파일에 조회한 데이터 보내기
         model.addAttribute("bbb", dto);
         // 4. 요청 헤더를 파싱하여 이전 페이지의 주소를 얻어냄

@@ -87,7 +87,6 @@ public class MemberService {
                             .build()
             );
         }
-
         // 일반로그인
         maintainLoginState(session, foundMember);
 
