@@ -14,9 +14,7 @@ public class ReactionService {
     private final ReactionMapper reactionMapper;
 
     // 공통 리액션 DB처리 메서드
-    private Reaction handleReaction(long boardNo
-            , String account
-            , ReactionType newReactionType) {
+    private Reaction handleReaction(long boardNo, String account, ReactionType newReactionType) {
 
         // 처음 리액션을 한다? -> 좋아요든 싫어요든 INSERT
         // 기존 리액션을 취소한다? -> 기존 데이터를 DELETE
@@ -52,9 +50,7 @@ public class ReactionService {
 
     // 좋아요 중간처리
     public ReactionDto like(long boardNo, String account) {
-
         Reaction reaction = handleReaction(boardNo, account, ReactionType.LIKE);
-
         return getReactionDto(boardNo, reaction);
     }
 
