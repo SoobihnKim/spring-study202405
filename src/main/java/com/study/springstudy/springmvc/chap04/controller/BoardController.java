@@ -103,6 +103,12 @@ public class BoardController {
     @ResponseBody
     public ResponseEntity<?> like(long bno, HttpSession session) {
 
+        // 로그인 검증
+        if(!LoginUtil.isLoggedIn(session)) {
+            return ResponseEntity.status(403)
+                    .body("로그인이 필요합니다.");
+        }
+
         log.info("like async request!");
 
         String account = LoginUtil.getLoggedInUserAccount(session);
@@ -112,11 +118,16 @@ public class BoardController {
         return ResponseEntity.ok().body(dto);
     }
 
-
     // 싫어요 요청 비동기 처리
     @GetMapping("/dislike")
     @ResponseBody
     public ResponseEntity<?> dislike(long bno, HttpSession session) {
+
+        // 로그인 검증
+        if(!LoginUtil.isLoggedIn(session)) {
+            return ResponseEntity.status(403)
+                    .body("로그인이 필요합니다.");
+        }
 
         log.info("dislike async request!");
 

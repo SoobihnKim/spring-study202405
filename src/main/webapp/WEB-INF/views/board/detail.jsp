@@ -203,6 +203,13 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             console.log(reactionType);
             const bno = document.getElementById('wrap').dataset.bno;
             const res = await fetch(`/board/\${reactionType}?bno=\${bno}`);
+
+            if(res.status === 403) {
+                const msg = await res.text();
+                alert(msg);
+                return;
+            }
+            
             const { likeCount, dislikeCount, userReaction } = await res.json();
 
             document.getElementById('like-count').textContent = likeCount;
