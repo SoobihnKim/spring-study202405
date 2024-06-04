@@ -14,6 +14,8 @@ public class LoginUtil {
     public static final String AUTO_LOGIN_COOKIE = "auto";
 
     // 로그인 여부 확인
+    // 현재 세션에 사용자가 로그인되어 있는지 여부를 나타내며,
+    // 로그인되어 있으면 true를, 그렇지 않으면 false를 반환
     public static boolean isLoggedIn(HttpSession session) {
         return session.getAttribute(LOGIN) != null;
     }
