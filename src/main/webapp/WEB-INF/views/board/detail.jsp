@@ -38,11 +38,11 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <div class="reaction-buttons">
           <button id="like-btn">
             <i class="fas fa-thumbs-up"></i> 좋아요
-            <span id="like-count">0</span>
+            <span id="like-count">${bbb.likeCount}</span>
           </button>
           <button id="dislike-btn" class="dislike-btn">
             <i class="fas fa-thumbs-down"></i> 싫어요
-            <span id="dislike-count">0</span>
+            <span id="dislike-count">${bbb.dislikeCount}</span>
           </button>
         </div>
 
@@ -194,6 +194,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <script type="module" src="/assets/js/reply.js"></script>
 
     <script>
+        // 렌더링 초기에 버튼활성화
+        const userReaction = '${bbb.userReaction}';
+        updateReactionButtons(userReaction);
 
         // 서버에 좋아요, 싫어요 요청을 보내는 함수
         async function sendReaction(reactionType) {
