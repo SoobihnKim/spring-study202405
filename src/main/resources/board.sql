@@ -214,3 +214,12 @@ CREATE TABLE tbl_reaction (
 );
 
 SELECT * FROM tbl_reaction;
+
+SELECT * FROM tbl_reply
+WHERE board_no = 104;
+
+ALTER TABLE tbl_reply
+ADD CONSTRAINT fk_reply_member
+foreign key (account)
+REFERENCES tbl_member(account)
+ON DELETE CASCADE ;
