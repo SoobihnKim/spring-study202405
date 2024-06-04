@@ -9,7 +9,7 @@
         INSERT INTO tbl_reaction
             (account, board_no, reaction_type)
         VALUES
-            (#{account}, #{boardNo}, #{reaction_type})
+            (#{account}, #{boardNo}, #{reactionType})
     </insert>
 
     <delete id="delete">
