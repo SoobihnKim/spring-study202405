@@ -16,21 +16,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       <h1>${bbb.boardNo}번 게시물 내용~</h1>
       <h2># 작성일자: ${bbb.regDateTime}</h2>
       <label for="writer">작성자</label>
-      <input
-        type="text"
-        id="writer"
-        name="writer"
-        value="${bbb.writer}"
-        readonly
-      />
+      <input type="text" id="writer" name="writer" value="${bbb.writer}" readonly/>
       <label for="title">제목</label>
-      <input
-        type="text"
-        id="title"
-        name="title"
-        value="${bbb.title}"
-        readonly
-      />
+      <input type="text" id="title" name="title" value="${bbb.title}" readonly/>
       <label for="content">내용</label>
       <div id="content">${bbb.content}</div>
 
@@ -45,14 +33,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             <span id="dislike-count">${bbb.dislikeCount}</span>
           </button>
         </div>
-
-        <button
-          class="list-btn"
-          type="button"
-          onclick="window.location.href='${ref}'"
-        >
-          목록
-        </button>
+        <button class="list-btn" type="button" onclick="window.location.href='${ref}'">목록 </button>
       </div>
 
       <!-- 댓글 영역 -->
@@ -81,11 +62,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                     <label for="newReplyWriter" hidden>댓글 작성자</label>
                     <input id="newReplyWriter" name="replyWriter" type="text" value="${login.nickName}" readonly
                       class="form-control" placeholder="작성자 이름"style="margin-bottom: 6px"/>
-                    <button id="replyAddBtn" type="button"
-                      class="btn btn-dark form-control"
-                    >
-                      등록
-                    </button>
+                    <button id="replyAddBtn" type="button" class="btn btn-dark form-control">등록</button>
                   </div>
                 </div>
               </div>
@@ -129,13 +106,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             <!-- Modal Header -->
             <div class="modal-header" style="background: #343a40; color: white">
               <h4 class="modal-title">댓글 수정하기</h4>
-              <button
-                type="button"
-                class="close text-white"
-                data-bs-dismiss="modal"
-              >
-                X
-              </button>
+              <button type="button" class="close text-white" data-bs-dismiss="modal"> X </button>
             </div>
 
             <!-- Modal body -->
@@ -143,28 +114,14 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               <div class="form-group">
                 <input id="modReplyId" type="hidden" />
                 <label for="modReplyText" hidden>댓글내용</label>
-                <textarea
-                  id="modReplyText"
-                  class="form-control"
-                  placeholder="수정할 댓글 내용을 입력하세요."
-                  rows="3"
-                ></textarea>
+                <textarea id="modReplyText" class="form-control" placeholder="수정할 댓글 내용을 입력하세요." rows="3"></textarea>
               </div>
             </div>
 
             <!-- Modal footer -->
             <div class="modal-footer">
-              <button id="replyModBtn" type="button" class="btn btn-dark">
-                수정
-              </button>
-              <button
-                id="modal-close"
-                type="button"
-                class="btn btn-danger"
-                data-bs-dismiss="modal"
-              >
-                닫기
-              </button>
+              <button id="replyModBtn" type="button" class="btn btn-dark"> 수정 </button>
+              <button id="modal-close" type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기</button>
             </div>
           </div>
         </div>
@@ -212,7 +169,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             // console.log(json);
             // 버튼 활성화 스타일 처리
             updateReactionButtons(userReaction);
-
         }
 
         // 좋아요, 싫어요 버튼 배경색 변경
@@ -245,9 +201,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             // console.log('dislike!');
             sendReaction('dislike');
         });
-
-
-
 
     </script>
 

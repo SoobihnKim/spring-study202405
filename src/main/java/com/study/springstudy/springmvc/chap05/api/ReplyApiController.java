@@ -32,10 +32,7 @@ public class ReplyApiController {
     // URL : /api/v1/replies/원본글번호/page/페이지번호   -  GET -> 목록조회
     // @PathVariable : URL에 붙어있는 변수값을 읽는 아노테이션
     @GetMapping("/{bno}/page/{pageNo}")
-    public ResponseEntity<?> list(
-            @PathVariable long bno
-            , @PathVariable int pageNo, HttpSession session
-    ) {
+    public ResponseEntity<?> list(@PathVariable long bno, @PathVariable int pageNo, HttpSession session) {
 
         if (bno == 0) {
             String message = "글 번호는 0번이 될 수 없습니다.";
@@ -58,8 +55,9 @@ public class ReplyApiController {
     // 댓글 생성 요청
     // @RequestBody : 클라이언트가 전송한 데이터를 JSON으로 받아서 파싱
     @PostMapping
-    public ResponseEntity<?> posts(@Validated @RequestBody ReplyPostDto dto, BindingResult result // 입력값 검증 결과 데이터를 갖고 있는 객체
-            , HttpSession session) {
+    public ResponseEntity<?> posts(@Validated @RequestBody ReplyPostDto dto,
+                                   BindingResult result // 입력값 검증 결과 데이터를 갖고 있는 객체
+                                   , HttpSession session) {
         log.info("/api/v1/replies : POST");
         log.debug("parameter: {}", dto);
 
@@ -121,10 +119,7 @@ public class ReplyApiController {
      */
 
     @RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH})
-    public ResponseEntity<?> modify(
-            @Validated @RequestBody ReplyModifyDto dto
-            , BindingResult result
-    ) {
+    public ResponseEntity<?> modify(@Validated @RequestBody ReplyModifyDto dto, BindingResult result) {
 
         log.info("/api/v1/replies : PUT, PATCH");
         log.debug("parameter: {}", dto);
