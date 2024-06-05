@@ -45,7 +45,6 @@ public class MemberController {
     @PostMapping("/sign-up")
     public String signUp(@Validated SignUpDto dto) {
 
-
         log.info("/members/sign-up POST ");
         log.debug("parameter: {}", dto);
 

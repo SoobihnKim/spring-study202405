@@ -25,7 +25,8 @@ public class ReplyDetailDto {
 
     private String account; // 댓글 작성자 계정명
 
-//    @JsonProperty("profile") 클라이언트가 profile로 달라하면 이렇게 변경하면 됨
+    // 클라이언트가 profile로 달라하면 이렇게 변경하면 됨
+    @JsonProperty("profile")
     private String profileImg;
 
     // 엔터티를 DTO로 변환하는 생성자
