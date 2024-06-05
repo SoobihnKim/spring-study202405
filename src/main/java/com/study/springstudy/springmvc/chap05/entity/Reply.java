@@ -36,5 +36,6 @@ public class Reply {
 
     private String account;
 
+//    private String profileImg; dto 새로 만드는게 유지보수를 위해 좋음
 
 }

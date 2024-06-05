@@ -231,3 +231,10 @@ SELECT * FROM tbl_member;
 
 DELETE FROM tbl_member
 WHERE account = 'tree';
+
+SELECT R.*, M.profile_img
+FROM tbl_reply R
+LEFT JOIN tbl_member M
+ON R.account = M.account
+WHERE R.board_no = 110
+;
