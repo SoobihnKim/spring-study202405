@@ -63,6 +63,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                     <input id="newReplyWriter" name="replyWriter" type="text" value="${login.nickName}" readonly
                       class="form-control" placeholder="작성자 이름"style="margin-bottom: 6px"/>
                     <button id="replyAddBtn" type="button" class="btn btn-dark form-control">등록</button>
+                    <img src="${login.profile}" alt="profile image">
                   </div>
                 </div>
               </div>
