@@ -16,10 +16,13 @@ public class LoginUserInfoDto {
     private String email;
     private String auth;
 
+    private String profile;
+
     public LoginUserInfoDto(Member member) {
         this.account = member.getAccount();
         this.nickName = member.getName();
         this.email = member.getEmail();
         this.auth = member.getAuth().name();
+        this.profile = member.getProfileImg();
     }
 }

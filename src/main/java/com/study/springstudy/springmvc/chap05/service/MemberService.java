@@ -104,6 +104,7 @@ public class MemberService {
         log.debug("session time: {}", maxInactiveInterval);
 //        session.setAttribute("loginUserName", foundMember.getName());
 
+        // 세션에 로그인한 회원 정보 세팅
         session.setAttribute(LOGIN, new LoginUserInfoDto(foundMember));
     }
 
