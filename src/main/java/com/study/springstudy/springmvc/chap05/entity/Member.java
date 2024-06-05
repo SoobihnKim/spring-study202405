@@ -16,6 +16,7 @@ CREATE TABLE tbl_member (
     reg_date DATETIME DEFAULT current_timestamp,
     CONSTRAINT pk_member PRIMARY KEY (account)
 );
+DB랑 1대1로 맞춰야함(필드명 카멜케이스로)
  */
 @Getter @ToString
 @NoArgsConstructor
@@ -36,6 +37,9 @@ public class Member {
 
     private String sessionId;
     private LocalDateTime limitTime;
+
+    @Setter
+    private String profileImg;
 
 
 }

@@ -15,7 +15,7 @@ import java.io.IOException;
 @Slf4j
 public class UploadController {
 
-    // 업로드 루트 경로
+    // 업로드 루트 경로 "D:/spring-prj/upload" 이렇게 하면 보안에 좋지 않음
     private String rootPath = "D:/spring-prj/upload";
 
     @GetMapping("/upload/form")

@@ -223,3 +223,11 @@ ADD CONSTRAINT fk_reply_member
 foreign key (account)
 REFERENCES tbl_member(account)
 ON DELETE CASCADE ;
+
+ALTER TABLE tbl_member
+    ADD (profile_img VARCHAR(200));
+
+SELECT * FROM tbl_member;
+
+DELETE FROM tbl_member
+WHERE account = 'tree';
