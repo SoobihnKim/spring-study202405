@@ -224,8 +224,6 @@
           $img.src = reader.result;
         };
 
-
-
       });
 
 
